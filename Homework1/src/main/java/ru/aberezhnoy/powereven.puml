@@ -1,0 +1,19 @@
+@startuml
+
+start
+: base, pow <
+: result ASSIGN 1 ]
+
+while (pow GREATER 0) is (yes)
+if (pow MODULE 2 NOT EQUAL 0) then (yes)
+    : result ASSIGN result MULTIPLY base;
+    : pow EQUAL pow SUBTRACT 1;
+endif
+    : base ASSIGN base MULTIPLY base;
+    : pow EQUAL pow DIVIDE 2;
+endwhile (no)
+: result >
+
+end
+
+@enduml
