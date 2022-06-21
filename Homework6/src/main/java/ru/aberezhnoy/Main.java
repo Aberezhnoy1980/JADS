@@ -6,6 +6,27 @@ import java.util.List;
 import java.util.Objects;
 
 public class Main {
+    private static void uniqueRandom(List<Integer> a, int amount) {
+        SecureRandom sr = new SecureRandom();
+        while (a.size() < amount) {
+            int num = sr.nextInt();
+            if (!a.contains(num))
+                a.add(num);
+        }
+    }
+
+    public static void main(String[] args) {
+        final int TREES = 50;
+        int balanced = 0;
+        for (int i = 0; i < TREES; i++) {
+            ArrayList<Integer> a = new ArrayList<>();
+            uniqueRandom(a, 1000);
+            Tree t = new Tree(a);
+            balanced += (t.isBalanced(false)) ? 1 : 0;
+        }
+        System.out.println(balanced * 100f / TREES + "%");
+    }
+
     private static class Cat {
         String name;
         int age;
@@ -52,25 +73,14 @@ public class Main {
     }
 
     public static class Tree {
-        public class TreeNode {
-            private Cat cat;
-            public TreeNode leftChild;
-            public TreeNode rightChild;
-
-            public TreeNode(Cat cat) {
-                this.cat = cat;
-            }
-
-            @Override
-            public String toString() {
-                return String.format("TN(%s)", cat);
-            }
-        }
-
         private TreeNode root;
 
         public Tree() {
             root = null;
+        }
+
+        public Tree(List<Integer> sampleData) {
+            sampleData.forEach(o -> Tree.this.insert(new Cat("Cat" + o, o)));
         }
 
         public void insert(Cat c) {
@@ -197,10 +207,6 @@ public class Main {
             return successor;
         }
 
-        public Tree(List<Integer> sampleData) {
-            sampleData.forEach(o -> insert(new Cat("Cat" + o, o)));
-        }
-
         public boolean isBalanced(boolean precision) {
             return Math.abs(countDepth(root.leftChild) - countDepth(root.rightChild))
                     <= ((precision) ? 0 : 1);
@@ -234,26 +240,27 @@ public class Main {
                 return -1;
             return 1 + ((lDepth > rDepth) ? lDepth : rDepth);
         }
-    }
 
-    private static void uniqueRandom(List<Integer> a, int amount) {
-        SecureRandom sr = new SecureRandom();
-        while (a.size() < amount) {
-            int num = sr.nextInt();
-            if (!a.contains(num))
-                a.add(num);
+        @Override
+        public String toString() {
+            return "Tree{" +
+                    "root=" + root +
+                    '}';
         }
-    }
 
-    public static void main(String[] args) {
-        final int TREES = 50;
-        int balanced = 0;
-        for (int i = 0; i < TREES; i++) {
-            ArrayList<Integer> a = new ArrayList<>();
-            uniqueRandom(a, 1000);
-            Tree t = new Tree(a);
-            balanced += (t.isBalanced(false)) ? 1 : 0;
+        public class TreeNode {
+            private final Cat cat;
+            public TreeNode leftChild;
+            public TreeNode rightChild;
+
+            public TreeNode(Cat cat) {
+                this.cat = cat;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("TN(%s)", cat);
+            }
         }
-        System.out.println(balanced * 100f / TREES + "%");
     }
 }
