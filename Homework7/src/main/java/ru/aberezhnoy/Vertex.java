@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Vertex {
 
     private char label;
+    private Vertex parent;
     private boolean isVisited;
 
     public Vertex(char label) {
@@ -14,19 +15,23 @@ public class Vertex {
 
     @Override
     public String toString() {
-        return "V (" + label + ")";
+        return "V: " + label + "-> ";
     }
 
     public char getLabel() {
         return label;
     }
 
-    public void setVertex(char label) {
-        this.label = label;
-    }
-
     public boolean getIsVisited() {
         return isVisited;
+    }
+
+    public Vertex getParent() {
+        return parent;
+    }
+
+    public void setParent(Vertex parent) {
+        this.parent = parent;
     }
 
     public void isVisited(boolean isVisited) {

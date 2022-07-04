@@ -1,5 +1,7 @@
 package ru.aberezhnoy;
 
+import java.util.Arrays;
+
 public class Queue {
     private int maxSize;
     private int[] queue;
@@ -87,5 +89,38 @@ public class Queue {
 
     public int peek() {
         return queue[head];
+    }
+
+    @Override
+    public String toString() {
+        return "Queue{" +
+                "maxSize=" + maxSize +
+                ", queue=" + Arrays.toString(queue) +
+                ", head=" + head +
+                ", tail=" + tail +
+                ", items=" + items +
+                '}';
+    }
+    public static void main(String[] args) {
+
+        Queue queue = new Queue(10);
+
+        queue.insert(0);
+        queue.insert(1);
+        queue.insert(2);
+        queue.insert(3);
+        queue.insert(4);
+        queue.insert(5);
+        queue.insert(6);
+        queue.insert(7);
+        queue.insert(8);
+        queue.insert(9);
+
+        System.out.println(queue);
+
+        while( !queue.isEmpty() ) {
+            int n = queue.remove();
+            System.out.println(n);
+        }
     }
 }
