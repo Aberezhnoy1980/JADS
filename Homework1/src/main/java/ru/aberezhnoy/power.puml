@@ -1,0 +1,24 @@
+@startuml
+
+start
+: base, pow <
+: result ASSIGN 1 ]
+
+while (pow GREATER 0) is (yes)
+    : result ASSIGN result MULTIPLY base;
+    : pow EQUAL pow SUBTRACT 1;
+endwhile (no)
+if (pow EQUAL 0) then (yes)
+    : result ASSIGN 1 ]
+else
+    : tempResult ASSIGN 1 ]
+while (pow LESS 0)
+    : result ASSIGN \n 1 DIVIDE (tempResult ASSIGN \n tempResult \n MULTIPLY base);
+    : pow EQUAL pow ADD 1;
+endwhile
+endif
+: result >
+
+end
+
+@enduml

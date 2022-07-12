@@ -1,0 +1,15 @@
+@startuml
+
+start
+: startValue,\n endValue <
+: sum ASSIGN 0 ]
+
+while (startValue NOT EQUAL endValue) is (yes)
+    : cycle step startValue ADD 1\n (numbersCounter);
+    : sum ADD startValue;
+endwhile (no)
+: sum;
+
+end
+
+@enduml
